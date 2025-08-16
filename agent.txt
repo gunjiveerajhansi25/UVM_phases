@@ -1,0 +1,67 @@
+class my_agent extends uvm_agent;
+  
+  `uvm_component_utils(my_agent)
+  
+  function new(string name = "agent",uvm_component parent = null);
+    super.new(name,parent);
+  endfunction
+  
+  my_driver    m_dri;
+  my_monitor   m_mon;
+  my_sequencer m_seqr;
+  
+  virtual function void build_phase(uvm_phase phase);
+    super.build_phase(phase);
+    `uvm_info("AGENT","Starting of build_phase",UVM_MEDIUM)
+    m_dri = my_driver :: type_id::create("m_dri",this);
+    m_mon = my_monitor :: type_id :: create("m_mon",this);
+    m_seqr = my_sequencer :: type_id :: create("m_seqr",this);
+  endfunction
+  
+  virtual function void connect_phase(uvm_phase phase);
+    super.connect_phase(phase);
+    `uvm_info("AGENT","Starting of connect_phase...",UVM_MEDIUM)
+    m_dri.seq_item_port.connect(m_seqr.seq_item_export);
+  endfunction
+  
+  virtual function void end_of_elaboration_phase(uvm_phase phase);
+    super.end_of_elaboration_phase(phase);
+    `uvm_info("AGENT","Starting of end_of_elaboration_phase..",UVM_MEDIUM)
+  endfunction
+  
+  virtual function void start_of_simulation_phase(uvm_phase phase);
+    super.start_of_simulation_phase(phase);
+    `uvm_info("AGENT","Starting of start_of_simulation_phase..",UVM_MEDIUM)
+    // uvm_top.print_topology();
+  endfunction
+  
+  virtual task run_phase(uvm_phase phase);
+    super.run_phase(phase);
+    `uvm_info("AGENT","Starting of run_phase...",UVM_MEDIUM)
+   
+    `uvm_info("AGENT","END of run_phase...",UVM_MEDIUM)
+  endtask
+  
+  virtual function void extract_phase(uvm_phase phase);
+    super.extract_phase(phase);
+    `uvm_info("AGENT","Starting of extract..",UVM_MEDIUM)
+  endfunction
+  
+  virtual function void check_phase(uvm_phase phase);
+    super.check_phase(phase);
+    `uvm_info("AGENT","Starting of check_phase...",UVM_MEDIUM)
+  endfunction
+  
+  virtual function void report_phase(uvm_phase phase);
+    super.report_phase(phase);
+    `uvm_info("AGENT","Starting of report..",UVM_MEDIUM)
+  endfunction
+  
+  virtual function void final_phase(uvm_phase phase);
+    super.final_phase(phase);
+    `uvm_info("AGENT","Starting of final_phase...",UVM_MEDIUM)
+  endfunction
+  
+endclass
+   
+    

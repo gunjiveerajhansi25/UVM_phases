@@ -1,0 +1,9 @@
+class sequence_item extends uvm_sequence_item;
+  `uvm_object_utils(sequence_item)
+  
+  function new(string name = "sequence_item");
+    super.new(name);
+    `uvm_info("SEQUENCE_ITEM","Start of sequence item",UVM_MEDIUM)
+  endfunction
+
+endclass

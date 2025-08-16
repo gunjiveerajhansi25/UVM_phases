@@ -1,0 +1,20 @@
+`include "my_pkg.sv"
+
+module top;
+   
+  
+  initial begin
+    run_test("my_test");
+    #2 $finish;
+  end
+  initial begin 
+    $dumpfile("dumb.vcd");
+    $dumpvars;
+  end
+endmodule
+
+  
+  
+  
+  
+  

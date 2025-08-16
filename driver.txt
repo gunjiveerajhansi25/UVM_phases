@@ -1,0 +1,72 @@
+class my_driver extends uvm_driver#(sequence_item);
+  
+  `uvm_component_utils(my_driver)
+  
+  function new(string name = "dri",uvm_component parent=null);
+    super.new(name,parent);
+  endfunction
+  
+  sequence_item seq_it;
+  
+  virtual function void build_phase(uvm_phase phase);
+    super.build_phase(phase);
+    `uvm_info("DRIVER","Starting of build_phase...",UVM_MEDIUM)
+    seq_it = sequence_item :: type_id :: create("seq_it");
+  endfunction
+  
+  virtual function void connect_phase(uvm_phase phase);
+    super.connect_phase(phase);
+    `uvm_info("DRIVER","Starting of connect_phase...",UVM_MEDIUM)
+  endfunction 
+      
+  virtual function void end_of_elaboration_phase(uvm_phase phase);
+    super.end_of_elaboration_phase(phase);
+    `uvm_info("DRIVER","Starting of end_of_elaboration_phase..",UVM_MEDIUM)
+  endfunction
+  
+  virtual function void start_of_simulation_phase(uvm_phase phase);
+    super.start_of_simulation_phase(phase);
+    `uvm_info("DRIVER","Starting of start_of_simulation_phase..",UVM_MEDIUM)
+    // uvm_top.print_topology();
+  endfunction
+      
+  virtual task run_phase(uvm_phase phase);
+   super.run_phase(phase);
+    `uvm_info("DRIVER","Starting of run_phase...",UVM_MEDIUM)
+   // forever begin
+      seq_item_port.get_next_item(seq_it);
+      `uvm_info("DRIVER","Driving data...",UVM_MEDIUM)
+      seq_item_port.item_done();
+    //end
+  endtask
+  
+  virtual function void extract_phase(uvm_phase phase);
+    super.extract_phase(phase);
+    `uvm_info("DRIVER","Starting of extract..",UVM_MEDIUM)
+  endfunction
+  
+  virtual function void check_phase(uvm_phase phase);
+    super.check_phase(phase);
+    `uvm_info("DRIVER","Starting of check_phase...",UVM_MEDIUM)
+  endfunction
+  
+  virtual function void report_phase(uvm_phase phase);
+    super.report_phase(phase);
+    `uvm_info("DRIVER","Starting of report..",UVM_MEDIUM)
+  endfunction
+  
+  virtual function void final_phase(uvm_phase phase);
+    super.final_phase(phase);
+    `uvm_info("DRIVER","Starting of final_phase...",UVM_MEDIUM)
+  endfunction
+  
+endclass
+    
+      
+          
+      
+    
+    
+    
+       
+                                                

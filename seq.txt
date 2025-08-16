@@ -1,0 +1,27 @@
+class my_sequence extends uvm_sequence#(sequence_item);
+  `uvm_object_utils(my_sequence)
+  
+  function new(string name = "my_sequence");
+    super.new(name);
+  endfunction
+  
+  task body();
+    sequence_item seq_it;
+    `uvm_info("SEQUENCE",$sformatf("Start of body......"),UVM_MEDIUM)
+   // repeat(10)begin
+    seq_it = sequence_item :: type_id :: create("seq_it");
+      start_item(seq_it);
+    assert(seq_it.randomize());
+    `uvm_info("SEQUENCE",$sformatf("Waiting for finish_item..."),UVM_MEDIUM)
+      finish_item(seq_it);
+    `uvm_info("SEQUENCE",$sformatf("End of body......"),UVM_MEDIUM)
+    //end
+  endtask
+endclass
+    
+    
+    
+    
+                                                
+                                                
+                                                
